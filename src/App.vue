@@ -1,18 +1,41 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <nav>
+    <router-link to="/">Home</router-link>
+    <router-link to="/register">Register</router-link>
+    <router-link to="/signin">Sign in</router-link>
+    <router-link to="/feed">Feed</router-link>
+    <button @click="handleSignOut" v-if="isLoggedIn">Signout</button>
+  </nav>
+  <router-view />
 </template>
+<script setup>
+import { onMounted, ref } from 'vue';
+import { getAuth, onAuthStateChanged, signOut } from '@firebase/auth';
+import { useRouter } from 'vue-router';
+
+const isLoggedIn = ref(false);
+
+const router = useRouter();
+let auth;
+
+onMounted(() => {
+  auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if(user) {
+      isLoggedIn.value = true;
+    } else {
+      isLoggedIn.value = false;
+    }
+  })
+});
+
+const handleSignOut = () =>  {
+  signOut(auth).then(router.push('/'));
+}
+
+
+//export {app, auth}
+</script>
 
 <style scoped>
 .logo {

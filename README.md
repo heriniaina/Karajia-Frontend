@@ -1,3 +1,9 @@
 # Karajia-Frontend
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/vitejs-vite-z1jbjh)
+This is a project to create the frontend socket.io chat for karajia.org
+
+First part to tag is to prepare the tools
+- Vuejs for front end
+- Vue-router to manage routes
+- Vite for the build
+- Firebase auth (just in case)
