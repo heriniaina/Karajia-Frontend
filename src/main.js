@@ -12,7 +12,7 @@ import App from './App.vue'
 import router from "./router"
 
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Follow this pattern to import other Firebase services
 // import { } from 'firebase/<service>';
@@ -32,6 +32,7 @@ initializeApp(firebaseConfig);
 
 
 const auth = getAuth();
+
 
 
 const app = createApp(App)
